@@ -1,0 +1,8 @@
+.env_local
+*/.idea/
+*/target/**/
+data/
+example/write.sh
+example/connector_local.json
+
+.DS_Store

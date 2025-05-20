@@ -1,0 +1,22 @@
+{
+    "connector.class": "io.confluent.connect.s3.source.S3SourceConnector",
+    "topics.dir": "{S3_DIR}/",
+    "s3.region": "{S3_REGION}",
+    "tasks.max": "1",
+    "kafka.auth.mode": "KAFKA_API_KEY",
+    "topic.regex.list": "person:.*\\.json",
+    "aws.secret.access.key": "{AWS_SECRET_KEY}",
+    "aws.access.key.id": "{AWS_KEY_ID}",
+    "mode": "GENERIC",
+    "format.class": "io.confluent.connect.s3.format.json.JsonFormat",
+    "s3.bucket.name": "{AWS_S3_BUCKET_NAME}",
+    "transforms": "setSchema",
+    "transforms.setSchema.type": "com.github.lgouellec.kafka.connect.smt.SetSchema",
+    "transforms.setSchema.schema.registry.url": "https://XXXXXXXXX.confluent.cloud",
+    "transforms.setSchema.schema.registry.auto.register.schemas": "false",
+    "transforms.setSchema.schema.registry.basic.auth.credentials.source": "USER_INFO",
+    "transforms.setSchema.schema.registry.basic.auth.user.info": "{CC_SR_API_KEY}:{CC_SR_API_SECRET}",
+    "transforms.setSchema.subject.name.strategy": "io.confluent.kafka.serializers.subject.TopicNameStrategy",
+    "transforms.setSchema.schema.format": "JSON",
+    "transforms.setSchema.fail.strategy": "FAIL"
+}

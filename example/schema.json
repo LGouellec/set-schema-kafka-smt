@@ -1,0 +1,4 @@
+{
+  "schema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"title\":\"Person\",\"type\":\"object\",\"properties\":{\"country\":{\"type\":\"string\"},\"state\":{\"type\":\"string\"},\"street\":{\"type\":\"string\",\"confluent:tags\":[\"PII\"]},\"doornumber\":{\"type\":\"number\", \"connect.type\": \"int32\"},\"person\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"age\":{\"type\":\"number\", \"connect.type\": \"int32\"}}},\"cars\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"model\":{\"type\":\"string\"}}}}}}",
+  "schemaType": "JSON"
+}
