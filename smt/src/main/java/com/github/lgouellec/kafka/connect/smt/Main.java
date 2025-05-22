@@ -32,10 +32,10 @@ public class Main {
         Map<String, String> mapConfig = new HashMap<>();
         mapConfig.put("schema.registry." + AbstractKafkaSchemaSerDeConfig.AUTO_REGISTER_SCHEMAS, "false");
         mapConfig.put("schema.registry." + AbstractKafkaSchemaSerDeConfig.BASIC_AUTH_CREDENTIALS_SOURCE, "USER_INFO");
-        mapConfig.put("schema.registry." + AbstractKafkaSchemaSerDeConfig.USER_INFO_CONFIG, "KIK3H7NYXEOX67YP:5qUYz9dALpgAZdrxIlDpAlINv04pfWaRN1wHPl4d2W1ZpOkG7/xD8xcq9mhi0vhm");
+        mapConfig.put("schema.registry." + AbstractKafkaSchemaSerDeConfig.USER_INFO_CONFIG, "XXXX:YYY");
         mapConfig.put("schema.registry." + AbstractKafkaSchemaSerDeConfig.USE_LATEST_VERSION, "true");
 
-        mapConfig.put(SetSchema.ConfigName.SCHEMA_REGISTRY_URL, "https://psrc-k6gvm.us-west-2.aws.confluent.cloud");
+        mapConfig.put(SetSchema.ConfigName.SCHEMA_REGISTRY_URL, "URL");
         mapConfig.put(SetSchema.ConfigName.SUBJECT_NAME_STRATEGY, "io.confluent.kafka.serializers.subject.TopicNameStrategy");
         mapConfig.put(SetSchema.ConfigName.SCHEMA_CACHE_TTL_MS, "600000");
         mapConfig.put(SetSchema.ConfigName.SCHEMA_CACHE_MAXIMUM_SIZE, "50");
