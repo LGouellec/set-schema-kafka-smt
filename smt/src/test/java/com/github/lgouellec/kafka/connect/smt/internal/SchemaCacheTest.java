@@ -14,11 +14,14 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class SchemaCacheTest {
+
+    private final Map<String, ?> configs = Map.of();
 
     public final String topic = "person";
     public final String schema = "{\n" +
@@ -105,7 +108,7 @@ public class SchemaCacheTest {
                 TopicNameStrategy.class,
                 100,
                 50,
-                "JSON");
+                "JSON", configs);
 
         Schema schema = cache.getSchema(Utils.buildSourceRecord(topic));
         assertNotNull(schema);
@@ -119,7 +122,7 @@ public class SchemaCacheTest {
                 TopicNameStrategy.class,
                 100,
                 50,
-                "JSON");
+                "JSON", configs);
 
         Schema schema = cache.getSchema(Utils.buildSourceRecord(topic));
         assertNotNull(schema);
@@ -136,7 +139,7 @@ public class SchemaCacheTest {
                 TopicNameStrategy.class,
                 100,
                 50,
-                "JSON");
+                "JSON", configs);
 
         Schema schema = cache.getSchema(Utils.buildSourceRecord("unknow"));
         assertNull(schema);

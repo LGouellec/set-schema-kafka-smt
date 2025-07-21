@@ -110,7 +110,8 @@ public class SetSchema<R extends ConnectRecord<R>> implements Transformation<R>,
                 subjectNameStrategy,
                 ttlCache,
                 maxCacheSize,
-                schemaFormat);
+                schemaFormat,
+                configs);
     }
 
     @Override

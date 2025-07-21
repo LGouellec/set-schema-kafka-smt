@@ -9,7 +9,10 @@ services:
     ports:
       - "8083:8083"
       - "5005:5005"
+      - "9999:9999"
     environment:
+      KAFKA_JMX_PORT: 9999
+      KAFKA_JMX_HOSTNAME: localhost
       CONNECT_BOOTSTRAP_SERVERS: ${CC_BOOTSTRAP_SERVER}
       CONNECT_GROUP_ID: "connect"
       CONNECT_CONFIG_STORAGE_TOPIC: demo-connect-configs

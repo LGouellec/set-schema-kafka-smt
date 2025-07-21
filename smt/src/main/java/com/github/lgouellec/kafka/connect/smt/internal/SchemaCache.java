@@ -1,8 +1,12 @@
 package com.github.lgouellec.kafka.connect.smt.internal;
 
+import com.github.lgouellec.kafka.connect.smt.converter.JsonSchemaData2;
+import com.github.lgouellec.kafka.connect.smt.converter.JsonSchemaDataConfig2;
 import io.confluent.connect.avro.AvroData;
-import io.confluent.connect.json.JsonSchemaData;
+import io.confluent.connect.avro.AvroDataConfig;
+import io.confluent.connect.json.JsonSchemaDataConfig;
 import io.confluent.connect.protobuf.ProtobufData;
+import io.confluent.connect.protobuf.ProtobufDataConfig;
 import io.confluent.kafka.schemaregistry.ParsedSchema;
 import io.confluent.kafka.schemaregistry.avro.AvroSchema;
 import io.confluent.kafka.schemaregistry.client.SchemaMetadata;
@@ -10,27 +14,25 @@ import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
 import io.confluent.kafka.schemaregistry.client.rest.exceptions.RestClientException;
 import io.confluent.kafka.schemaregistry.json.JsonSchema;
 import io.confluent.kafka.schemaregistry.protobuf.ProtobufSchema;
-import io.confluent.kafka.serializers.subject.strategy.SubjectNameStrategy;
 import org.apache.kafka.connect.connector.ConnectRecord;
 import org.apache.kafka.connect.data.Schema;
 import org.apache.kafka.connect.errors.DataException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Map;
 
 public class SchemaCache {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SchemaCache.class);
     private SchemaRegistryClient schemaRegistryClient;
     private final Class<?>  subjectNameStrategy;
-    private final JsonSchemaData jsonSchemaData = new JsonSchemaData();
-    private final ProtobufData protobufData = new ProtobufData();
-    private final AvroData avroData = new AvroData(1000);
+    private final JsonSchemaData2 jsonSchemaData;
+    private final ProtobufData protobufData;
+    private final AvroData avroData;
     private final int cacheTTLms;
     private MicroCache<String, SchemaMetadata> internalCache;
     private final String schemaFormat;
@@ -44,7 +46,8 @@ public class SchemaCache {
             Class<?> subjectNameStrategy,
             int cacheTTLms,
             int cacheMaxSize,
-            String schemaFormat)
+            String schemaFormat,
+            Map<String, ?> configs)
     {
         this.schemaRegistryClient = schemaRegistryClient;
         this.subjectNameStrategy = subjectNameStrategy;
@@ -65,6 +68,10 @@ public class SchemaCache {
                     }
                 },
                 cacheMaxSize);
+
+        jsonSchemaData = new JsonSchemaData2(new JsonSchemaDataConfig2(configs));
+        protobufData = new ProtobufData(new ProtobufDataConfig(configs));
+        avroData = new AvroData(new AvroDataConfig(configs));
     }
 
     public void close(){
